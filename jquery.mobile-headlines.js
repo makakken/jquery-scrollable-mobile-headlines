@@ -1,5 +1,5 @@
 (function ( $ ) {
-	$.fn.myNewPlugin = function(options) {
+	$.fn.mobileHeadlines = function(options) {
 
 		var defaults = {
 			fixedClass: "fixed",
