@@ -2,27 +2,22 @@
 	$.fn.mobileHeadlines = function(options) {
 
 		var defaults = {
-			fixedClass: "fixed",
-			absoluteClass: "absolute"
+			scrollClass: "scroll"
 		};
 
 		var settings = $.extend( {}, defaults, options );
+		var elements = this;
 
 		$(window).scroll(function() {
-			this.each(function() {
-				if( ($(this).offset().top + $(this).outerHeight() ) < $(window).scrollTop()) {
-					$(this).addClass(settings.fixedClass);
-				}
-
-				if($(this).offset().top >= $(window).scrollTop()) {
-					$(this).removeClass(settings.fixedClass);
-				}
-
-				var bottom = $(this).parent().offset().top + $(this).parent().outerHeight() - $(this).outerHeight();
-
-				if(bottom < $(window).scrollTop()) {
-					$(this).addClass(settings.absoluteClass);
-					$(this).offsetTop($(window).scrollTop());
+			$(elements).each(function() {
+				if(
+					$(window).scrollTop() > $(this).parent().offset().top &&
+					$(window).scrollTop() < ($(this).parent().offset().top + $(this).parent().outerHeight() - $(this).outerHeight())
+				) {
+					$(this).addClass(settings.scrollClass);
+					$(this).css('top',$(window).scrollTop() - $(this).parent().offset().top);
+				} else {
+					$(this).removeClass(settings.scrollClass);
 				}
 			});
 		});
