@@ -16,7 +16,8 @@
 				) {
 					$(this).addClass(settings.scrollClass);
 					$(this).css('top',$(window).scrollTop() - $(this).parent().offset().top);
-				} else {
+				}
+			  if( $(window).scrollTop() <= $(this).parent().offset().top ) {
 					$(this).removeClass(settings.scrollClass);
 				}
 			});
